@@ -11,7 +11,7 @@ enum class Error(private val msg: String) {
     override fun toString(): String = "$ERROR $msg"
 
     companion object {
-        private const val ERROR = "[Error]"
+        private const val ERROR = "[ERROR]"
     }
 
 }
