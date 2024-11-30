@@ -36,9 +36,7 @@ class CheckWinningNumberUseCase {
     }
 
     private fun isNumeric(spliterator: List<String>) {
-        spliterator.forEach {
-            requireNotNull(it.toIntOrNull()) { Error.ONLY_DIGIT }
-        }
+        require(spliterator.all { it.toIntOrNull() != null }) { Error.ONLY_DIGIT }
     }
 
     private fun isInvalidSize(spliterator: List<String>){
