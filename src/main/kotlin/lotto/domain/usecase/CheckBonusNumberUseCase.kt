@@ -31,6 +31,6 @@ class CheckBonusNumberUseCase {
     }
 
     private fun isDuplicated(winningNumber: List<Int>, input: String) {
-        require(winningNumber.contains(input.toInt()).not()) { Error.WINNING_DUPLICATED }
+        require(input.toInt() !in winningNumber) { Error.WINNING_DUPLICATED }
     }
 }
