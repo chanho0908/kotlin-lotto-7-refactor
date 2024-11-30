@@ -5,6 +5,11 @@ import lotto.domain.rule.Output.Companion.purchaseLottoCountFormat
 import lotto.domain.rule.Output.Companion.rateOfReturnFormat
 import lotto.domain.rule.Rank
 import lotto.domain.rule.Rank.Companion.getRankMessage
+import lotto.domain.rule.Rank.FIFTH
+import lotto.domain.rule.Rank.FIRST
+import lotto.domain.rule.Rank.FOURTH
+import lotto.domain.rule.Rank.SECOND
+import lotto.domain.rule.Rank.THIRD
 import lotto.domain.util.convertRoundAtTwoDecimal
 import lotto.presentation.event.UiEvent
 import java.util.TreeSet
@@ -22,9 +27,9 @@ data class LottoState(
         get() = purchaseLottoCountFormat(purchaseLottoCount)
 
     val pickedLottoMessage
-        get () = pickedLotto.joinToString("\n")
+        get() = pickedLotto.joinToString("\n")
 
-    fun makeWinningResultMessage(): String{
+    fun makeWinningResultMessage(): String {
         val sb = StringBuilder()
         winningResult.forEach { (rank, v) ->
             if (rank != Rank.NONE) sb.append(getRankMessage(rank, v))
@@ -50,7 +55,13 @@ data class LottoState(
                 emptyList(),
                 emptyList(),
                 0,
-                emptyMap(),
+                mapOf(
+                    FIRST to 0,
+                    SECOND to 0,
+                    THIRD to 0,
+                    FOURTH to 0,
+                    FIFTH to 0,
+                ),
                 UiEvent.OnUiEventInputPurchasePrice(Output.INPUT_PURCHASE_PRICE.msg)
             )
         }

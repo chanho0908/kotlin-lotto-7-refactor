@@ -13,8 +13,9 @@ enum class Rank(val reward: Int, val matchCount: Int) {
     NONE(0, 0);
 
     companion object {
-        fun getRank(matchCount: Int, bonusMatched: Boolean): Rank{
-            return when(matchCount){
+
+        fun getRank(matchCount: Int, bonusMatched: Boolean): Rank {
+            return when (matchCount) {
                 6 -> FIRST
                 5 -> if (bonusMatched) SECOND else THIRD
                 4 -> FOURTH

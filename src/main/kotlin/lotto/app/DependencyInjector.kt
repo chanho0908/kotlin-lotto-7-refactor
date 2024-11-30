@@ -1,7 +1,12 @@
 package lotto.app
 
-import lotto.presentation.InputView
-import lotto.presentation.OutputView
+import lotto.domain.usecase.CheckBonusNumberUseCase
+import lotto.domain.usecase.CheckPurchasePriceUseCase
+import lotto.domain.usecase.CheckWinningNumberUseCase
+import lotto.domain.usecase.MakeLottoUseCase
+import lotto.domain.usecase.OperateWinningUseCase
+import lotto.presentation.view.InputView
+import lotto.presentation.view.OutputView
 import lotto.presentation.controller.ViewController
 import lotto.presentation.vm.ViewModel
 
@@ -15,7 +20,18 @@ class DependencyInjector {
     }
 
     private fun injectViewModel(): ViewModel {
-        return ViewModel()
+        val checkPurchasePriceUseCase = CheckPurchasePriceUseCase()
+        val checkWinningNumberUseCase = CheckWinningNumberUseCase()
+        val checkBonusNumberUseCase = CheckBonusNumberUseCase()
+        val makeLottoUseCase = MakeLottoUseCase()
+        val operateWinningUseCase = OperateWinningUseCase()
+        return ViewModel(
+            checkPurchasePriceUseCase,
+            checkWinningNumberUseCase,
+            checkBonusNumberUseCase,
+            makeLottoUseCase,
+            operateWinningUseCase
+        )
     }
 
     private fun injectInputView() = InputView()

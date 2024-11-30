@@ -6,8 +6,7 @@ import lotto.domain.rule.NumericConstants.ONE_THOUSAND_UNIT
 class CheckPurchasePriceUseCase {
     operator fun invoke(input: String): Int{
         validate(input)
-        val purchaseLotto = input.toInt() / ONE_THOUSAND_UNIT.value
-        return purchaseLotto
+        return input.toInt()
     }
 
     private fun validate(input: String){

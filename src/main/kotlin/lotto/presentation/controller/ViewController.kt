@@ -1,7 +1,7 @@
 package lotto.presentation.controller
 
-import lotto.presentation.InputView
-import lotto.presentation.OutputView
+import lotto.presentation.view.InputView
+import lotto.presentation.view.OutputView
 import lotto.presentation.event.UiEvent
 import lotto.presentation.util.retryWhenNoException
 import lotto.presentation.vm.ViewModel
@@ -18,9 +18,9 @@ class ViewController(
     private fun checkUiEvent() {
         when(val event = viewModel.state.uiEvent){
             is UiEvent.OnUiEventInputPurchasePrice -> onUiEventInputPurchasePrice(event.msg)
+            is UiEvent.OnUiEventInputWinningNumber -> onUiEventInputWinningNumber(event.msg)
             is UiEvent.OnUiEventBonusNumber -> onUiEventBonusNumber(event.msg)
             is UiEvent.OnUiEventDisplayResult -> onUiEventDisplayResult(event.msg)
-            is UiEvent.OnUiEventInputWinningNumber -> onUiEventInputWinningNumber(event.msg)
         }
     }
 
@@ -28,25 +28,7 @@ class ViewController(
         retryWhenNoException {
             outputView.printMessage(msg)
             val input = inputView.readItem()
-            //viewModel.
-        }
-        checkUiEvent()
-    }
-
-    private fun onUiEventBonusNumber(msg: String) {
-        retryWhenNoException {
-            outputView.printMessage(msg)
-            val input = inputView.readItem()
-            //viewModel.
-        }
-        checkUiEvent()
-    }
-
-    private fun onUiEventDisplayResult(msg: String) {
-        retryWhenNoException {
-            outputView.printMessage(msg)
-            val input = inputView.readItem()
-            //viewModel.
+            viewModel.onCompleteInputPurchasePrice(input)
         }
         checkUiEvent()
     }
@@ -55,8 +37,21 @@ class ViewController(
         retryWhenNoException {
             outputView.printMessage(msg)
             val input = inputView.readItem()
-            //viewModel.
+            viewModel.onCompleteInputWinningNumber(input)
         }
         checkUiEvent()
+    }
+
+    private fun onUiEventBonusNumber(msg: String) {
+        retryWhenNoException {
+            outputView.printMessage(msg)
+            val input = inputView.readItem()
+            viewModel.onCompleteBonusNumber(input)
+        }
+        checkUiEvent()
+    }
+
+    private fun onUiEventDisplayResult(msg: String) {
+        outputView.printMessage(msg)
     }
 }
