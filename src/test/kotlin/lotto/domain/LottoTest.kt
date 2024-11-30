@@ -1,4 +1,4 @@
-package lotto
+package lotto.domain
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -18,6 +18,4 @@ class LottoTest {
             Lotto(listOf(1, 2, 3, 4, 5, 5))
         }
     }
-
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
 }
